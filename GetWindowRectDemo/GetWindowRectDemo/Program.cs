@@ -20,7 +20,7 @@ namespace GetWindowRectDemo
 
         static void Main(string[] args)
         {
-            Process process = Process.GetProcessesByName("wotblitz")[0];
+            Process process = Process.GetProcessesByName("notepad")[0];
 
             uint handle = (uint)process.MainWindowHandle; // хендл окна
 
