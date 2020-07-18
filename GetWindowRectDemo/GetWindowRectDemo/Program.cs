@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace GetWindowRectDemo
 {
@@ -20,16 +21,20 @@ namespace GetWindowRectDemo
 
         static void Main(string[] args)
         {
-            Process process = Process.GetProcessesByName("notepad")[0];
+            Process process = Process.GetProcessesByName("wotblitz")[0];
 
             uint handle = (uint)process.MainWindowHandle; // хендл окна
 
             Rect r = new Rect();
 
-            if (GetWindowRect((IntPtr)handle, ref r))
+            while (true)
             {
-                Console.WriteLine("Координата угла: " + r.left + " " + r.top + "\nРазмеры: " + (r.right - r.left) + " " + (r.bottom - r.top));
-                Console.ReadLine();
+                if (GetWindowRect((IntPtr)handle, ref r))
+                {
+                    Console.Clear();
+                    Console.WriteLine("Координата угла: " + r.left + " " + r.top + "\nРазмеры: " + (r.right - r.left) + " " + (r.bottom - r.top));
+                    Thread.Sleep(100);
+                }
             }
         }
     }
